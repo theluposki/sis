@@ -40,10 +40,16 @@ export const products = {
       ]);
     });
   },
-  async readAll(data) {
+  async readAll() {
     const sql = `SELECT * FROM products;`;
     return openDb().then((db) => {
       return db.all(sql).then(data => data);
+    });
+  },
+  async readOneByID(id) {
+    const sql = `SELECT * FROM products WHERE id=?;`;
+    return openDb().then((db) => {
+      return db.get(sql, [id]).then(data => data);
     });
   },
   async update(id, data) {
@@ -61,6 +67,12 @@ export const products = {
         amount,
         id
       ]);
+    });
+  },
+  async deleteOneByID(id) {
+    const sql = `DELETE FROM products WHERE id=?;`;
+    return openDb().then((db) => {
+      return db.get(sql, [id]).then(data => data);
     });
   },
 };

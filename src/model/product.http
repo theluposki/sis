@@ -4,16 +4,20 @@ POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Feijão",
-  "description": "Feijão Camil 1kg",
-  "price": 10.00,
-  "purchasePrice": 7.25,
+  "name": "Açucar",
+  "description": "Açucar Camil 1kg",
+  "price": 5.45,
+  "purchasePrice": 3.45,
   "amount": 5
 }
 
 
 ###
 GET http://localhost:3000/products HTTP/1.1
+
+###
+GET http://localhost:3000/products/89a68cdf-3547-43da-b219-3714f4348ef3 HTTP/1.1
+
 
 ###
 PUT http://localhost:3000/products/89a68cdf-3547-43da-b219-3714f4348ef3 HTTP/1.1
@@ -26,3 +30,6 @@ content-type: application/json
   "purchasePrice": 17.25,
   "amount": 4
 }
+
+###
+DELETE http://localhost:3000/products/79559299-1b45-4a20-a975-361cc60b0664 HTTP/1.1

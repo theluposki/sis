@@ -40,6 +40,12 @@ export const products = {
       ]);
     });
   },
+  async readAll(data) {
+    const sql = `SELECT * FROM products;`;
+    return openDb().then((db) => {
+      return db.all(sql).then(data => data);
+    });
+  },
   async update(id, data) {
     const { name, description, price, purchasePrice, amount } = data;
 

@@ -4,13 +4,16 @@ POST http://localhost:3000/products HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Arroz",
-  "description": "Arroz Camil 1kg",
-  "price": 20.00,
-  "purchasePrice": 17.25,
+  "name": "Feijão",
+  "description": "Feijão Camil 1kg",
+  "price": 10.00,
+  "purchasePrice": 7.25,
   "amount": 5
 }
 
+
+###
+GET http://localhost:3000/products HTTP/1.1
 
 ###
 PUT http://localhost:3000/products/89a68cdf-3547-43da-b219-3714f4348ef3 HTTP/1.1

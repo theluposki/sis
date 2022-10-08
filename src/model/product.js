@@ -40,4 +40,21 @@ export const products = {
       ]);
     });
   },
+  async update(id, data) {
+    const { name, description, price, purchasePrice, amount } = data;
+
+    const sql = `
+      UPDATE products SET name=?, description=?, price=?, purchase_price=?, amount=? WHERE id=?
+    `;
+    openDb().then((db) => {
+      db.run(sql, [
+        name,
+        description,
+        price,
+        purchasePrice,
+        amount,
+        id
+      ]);
+    });
+  },
 };

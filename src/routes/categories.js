@@ -1,31 +1,34 @@
 import { Router } from "express"
-import { products } from "../model/product.js"
+import { categories } from "../model/categories.js"
 
 
 const route = Router()
 
 route.post("/", async (req, res) => {
-    const result = await products.insert(req.body)
+    const { category } = req.body
+    const result = await categories.insert(category)
     res.status(200).json(result)
 })
 
 route.get("/", async (req, res) => {
-  const result = await products.readAll()
+  const result = await categories.readAll()
   res.status(200).json(result)
 })
 
 route.get("/:id", async (req, res) => {
-  const result = await products.readOneByID(req.params.id)
+  const result = await categories.readOneByID(req.params.id)
   res.status(200).json(result)
 })
 
 route.put("/:id", async (req, res) => {
-  const result = await products.update(req.params.id ,req.body)
+  const { category } = req.body
+
+  const result = await categories.update(req.params.id, category)
   res.status(200).json(result)
 })
 
 route.delete("/:id", async (req, res) => {
-  const result = await products.deleteOneByID(req.params.id)
+  const result = await categories.deleteOneByID(req.params.id)
   res.status(200).json(result)
 })
 

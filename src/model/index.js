@@ -1,5 +1,5 @@
-import { products } from "./product.js"
+import { categories } from "./categories.js"
 
 export const InitializeDatabase = () => {
-  products.createTable()
+  categories.createTable()
 }

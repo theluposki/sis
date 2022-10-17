@@ -1,0 +1,27 @@
+
+
+POST http://localhost:3000/category HTTP/1.1
+content-type: application/json
+
+{
+  "category": "Eletronicos"
+}
+
+
+###
+GET http://localhost:3000/category HTTP/1.1
+
+###
+GET http://localhost:3000/category/7 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/category/7 HTTP/1.1
+content-type: application/json
+
+{
+  "category": "Eletrônicos"
+}
+
+###
+DELETE http://localhost:3000/category/6 HTTP/1.1

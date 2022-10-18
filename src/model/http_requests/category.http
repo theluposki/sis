@@ -12,7 +12,7 @@ content-type: application/json
 GET http://localhost:3000/category HTTP/1.1
 
 ###
-GET http://localhost:3000/category/7 HTTP/1.1
+GET http://localhost:3000/category/3 HTTP/1.1
 
 
 ###

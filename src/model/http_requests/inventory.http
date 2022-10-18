@@ -1,0 +1,34 @@
+
+POST http://localhost:3000/inventory HTTP/1.1
+content-type: application/json
+
+{
+  "productId": 1,
+  "qtd": 21
+}
+
+###
+GET http://localhost:3000/inventory HTTP/1.1
+
+###
+GET http://localhost:3000/inventory/1 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/inventory/1 HTTP/1.1
+content-type: application/json
+
+{
+  "productId": 1,
+  "qtd": 22
+}
+###
+PUT http://localhost:3000/inventory/1/inc HTTP/1.1
+content-type: application/json
+
+###
+PUT http://localhost:3000/inventory/1/dec HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:3000/inventory/4 HTTP/1.1

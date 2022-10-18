@@ -1,0 +1,26 @@
+
+
+POST http://localhost:3000/brand HTTP/1.1
+content-type: application/json
+
+{
+  "brand": "Sorriso"
+}
+
+###
+GET http://localhost:3000/brand HTTP/1.1
+
+###
+GET http://localhost:3000/brand/5 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/brand/5 HTTP/1.1
+content-type: application/json
+
+{
+  "brand": "Solito"
+}
+
+###
+DELETE http://localhost:3000/brand/7 HTTP/1.1

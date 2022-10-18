@@ -1,0 +1,38 @@
+
+
+POST http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+  "name":"Sabonete", 
+  "desc":"Sabonete cherin", 
+  "purchasePrice": 1.12, 
+  "price": 2.50, 
+  "categoryId": 1, 
+  "brandId": 3, 
+  "weightId": 4
+}
+
+###
+GET http://localhost:3000/products HTTP/1.1
+
+###
+GET http://localhost:3000/products/5 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/products/4 HTTP/1.1
+content-type: application/json
+
+{
+  "name":"Sabonete", 
+  "desc":"Sabonete cherin", 
+  "purchasePrice": 1.12, 
+  "price": 2.50, 
+  "categoryId": 1, 
+  "brandId": 3, 
+  "weightId": 4
+}
+
+###
+DELETE http://localhost:3000/products/6 HTTP/1.1

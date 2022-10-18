@@ -1,0 +1,33 @@
+
+
+POST http://localhost:3000/exitHistory HTTP/1.1
+content-type: application/json
+
+{
+  "inventoryId": 1,
+  "clientId": 1,
+  "qtd": 5
+}
+
+###
+GET http://localhost:3000/exitHistory HTTP/1.1
+
+###
+GET http://localhost:3000/exitHistory/exits HTTP/1.1
+
+###
+GET http://localhost:3000/exitHistory/3 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/exitHistory/4 HTTP/1.1
+content-type: application/json
+
+{
+  "inventoryId": 1,
+  "clientId": 1,
+  "qtd": 2
+}
+
+###
+DELETE http://localhost:3000/exitHistory/6 HTTP/1.1

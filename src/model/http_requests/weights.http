@@ -1,0 +1,25 @@
+
+POST http://localhost:3000/weight HTTP/1.1
+content-type: application/json
+
+{
+  "weight": "2.5k"
+}
+
+###
+GET http://localhost:3000/weight HTTP/1.1
+
+###
+GET http://localhost:3000/weight/5 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/weight/10 HTTP/1.1
+content-type: application/json
+
+{
+  "weight": "3k"
+}
+
+###
+DELETE http://localhost:3000/weight/10 HTTP/1.1

@@ -16,7 +16,7 @@ export const Home = {
       <i class="ai-arrow-down-thick"></i>
     </router-link>
     
-    <router-link to="/" tabindex="3" class="c__box">
+    <router-link to="/products" tabindex="3" class="c__box">
       <h4>Produtos</h4>
       <i class="ai-grid"></i>
     </router-link>

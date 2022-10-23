@@ -4,6 +4,8 @@ import { routes } from "./js/router.js"
 import { headers } from "./js/components/headers.js";
 import { footers } from "./js/components/footers.js";
 
+axios.defaults.baseURL = 'http://localhost:3000';
+
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHashHistory(),
   routes,

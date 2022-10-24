@@ -45,6 +45,15 @@ body {
   flex-direction: column;
 }
 
+input[type="search"],input[type="text"], input[type="number"] {
+  height: 40px;
+  border: solid 1px var(--dark);
+  border-radius: 3px;
+  margin: 5px;
+  padding: 8px 16px;
+  box-shadow: 0 0 2px 0 var(--dark);
+}
+
 a {
   text-decoration: none;
   color: var(--dark);
@@ -201,46 +210,188 @@ a {
   Products
 *
 */
-.table_products {
-  width: 100%;
-  background-color: white;
 
+.products {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-flow: row wrap;
   flex-direction: column;
 }
 
-tr { 
-  display: flex; 
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  border: 1px solid rgba(3,3,3,0.2);
-}
-td, th {
-  flex: 1 1 150px;
-  border: 0.5px solid rgba(3,3,3,0.2);
+.prod_headers {
+  position: fixed;
+  background-color: var(--white);
+  padding: 5px;
+
+  width: 100%;
+  height: 150px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
 }
 
-.table_products th, .table_products td { 
-  text-align: left;
-  padding: 8px; 
+.p_h-info {
+  flex: 1;
+  background-color: var(--dark);
+}
+.p_h-action {
+  flex: 1;
+  background-color: var(--green);
+}
+.p_h-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
-td:nth-child(8) {
-  font-size: 12px;
+.types-searchs {
+  display: flex;
+  align-items: center;
 }
 
-.table_products tr { 
-  border-bottom: 1px solid #212121;
+.types-searchs label {
+  font-size: 18px;
+  margin: 5px;
+  padding: 8px 16px;
+  font-weight: 800;
 }
 
-.table_products .edit-buttons {
-  text-align: right;
+
+.content-table {
+  margin-top: 155px;
+  width: 100%;
+  display: flex;
 }
+
+.table {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+}
+
+.table tbody td {
+  padding: 10px;
+}
+
+.edit-buttons button {
+  background-color: transparent;
+  width: 100%;
+  font-size: 28px;
+}
+
+.edit-buttons button:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+
+
+.edit-buttons button:active {
+  color: var(--silver);
+}
+
+.table thead {
+  background-color: var(--dark);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.table tbody tr:nth-child(2n){
+  background-color: #ddd;
+}
+
+
 
 
 /*
 *
-  End Home
+  End Products
 *
 */
+
+@media screen and (min-width: 1200px) {
+  .content-table {
+    width: 100%;
+  }
+  .table-prod tbody tr td:nth-child(1){ /* id */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(2){ /* nome */
+    min-width: 20%;
+  }
+  .table-prod tbody tr td:nth-child(3){ /* desc */
+    min-width: 20%;
+  }
+  .table-prod tbody tr td:nth-child(4){ /* preço de compra */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(5){ /* preço */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(6){ /* categoria */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(7){ /* marca */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(8){ /* unidade */
+    min-width: 5%;
+  }
+  .table-prod tbody tr td:nth-child(9){ /* data */
+    min-width: 10%;
+  }
+  .table-prod tbody tr td:nth-child(10){ /* btns*/
+    min-width: 10%;
+  }
+}
+
+
+@media screen and (max-width: 1199px) {
+  .p_h-search {
+    flex-direction: column-reverse;
+  }
+
+  .p_h-search > input[type="search"] {
+    width: 94%;
+  }
+
+  .content-table {
+    width: 99.5%;
+    overflow-x: scroll;
+  }
+
+  .table-prod tbody tr td:nth-child(1){ /* id */
+    min-width: 50px;
+  }
+  .table-prod tbody tr td:nth-child(2){ /* nome */
+    min-width: 200px;
+  }
+  .table-prod tbody tr td:nth-child(3){ /* desc */
+    min-width: 200px;
+  }
+  .table-prod tbody tr td:nth-child(4){ /* preço de compra */
+    min-width: 100px;
+  }
+  .table-prod tbody tr td:nth-child(5){ /* preço */
+    background-color: #d6f6dc;
+    color: #156323;
+    min-width: 100px;
+  }
+  .table-prod tbody tr td:nth-child(6){ /* categoria */
+    min-width: 100px;
+  }
+  .table-prod tbody tr td:nth-child(7){ /* marca */
+    min-width: 100px;
+  }
+  .table-prod tbody tr td:nth-child(8){ /* unidade */
+    min-width: 100px;
+  }
+  .table-prod tbody tr td:nth-child(9){ /* data */
+    min-width: 200px;
+  }
+  .table-prod tbody tr td:nth-child(10){ /* btns*/
+    min-width: 100px;
+  }
+}

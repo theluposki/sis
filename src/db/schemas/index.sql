@@ -67,6 +67,35 @@ VALUES
 
 SELECT * FROM products;
 
+SELECT p.id, p.name, p.desc, p.purchase_price, p.price, c.category, b.brand, w.Weight, p.create_at
+FROM products AS p
+
+INNER JOIN category AS c
+ON c.id = p.category_id
+
+INNER JOIN brand AS b
+ON b.id = p.brand_id
+
+INNER JOIN weight AS w
+ON w.id = p.weight_id;
+
+
+
+SELECT p.id, p.name, p.desc, p.purchase_price, p.price, c.category, b.brand, w.Weight, p.create_at
+FROM products AS p
+
+INNER JOIN category AS c
+ON c.id = p.category_id
+
+INNER JOIN brand AS b
+ON b.id = p.brand_id
+
+INNER JOIN weight AS w
+ON w.id = p.weight_id
+WHERE p.name LIKE 'Ar%'; 
+
+
+
 CREATE TABLE IF NOT EXISTS inventory (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 

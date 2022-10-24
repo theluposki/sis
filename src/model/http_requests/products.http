@@ -19,6 +19,15 @@ GET http://localhost:3000/products HTTP/1.1
 ###
 GET http://localhost:3000/products/5 HTTP/1.1
 
+###
+GET http://localhost:3000/products/name/f HTTP/1.1
+###
+GET http://localhost:3000/products/data/18 HTTP/1.1
+###
+GET http://localhost:3000/products/price/2 HTTP/1.1
+
+
+
 
 ###
 PUT http://localhost:3000/products/4 HTTP/1.1

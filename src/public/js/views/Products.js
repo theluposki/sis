@@ -1,5 +1,3 @@
-//import { axios } from "../axios/index.js"
-
 export const Products = {
   name: "Produtos",
   template: 
@@ -10,7 +8,7 @@ export const Products = {
       <div class="p_h-action"></div>
 
       <div class="p_h-search">
-        <input type="search" :placeholder="typesSearch"/>
+        <input @keyup="searchLike()" v-model="search" type="search" :placeholder="typesSearch"/>
         <div class="types-searchs">
           <label for="types1">
             Nome
@@ -53,9 +51,9 @@ export const Products = {
             <td>{{prod.desc}}</td>
             <td>{{currency(prod.purchase_price)}}</td>
             <td>{{currency(prod.price)}}</td>
-            <td>{{prod.category_id}}</td>
-            <td>{{prod.brand_id}}</td>
-            <td>{{prod.weight_id}}</td>
+            <td>{{prod.category}}</td>
+            <td>{{prod.brand}}</td>
+            <td>{{prod.Weight}}</td>
             <td>{{dateFormat(prod.create_at)}}</td>
             <td class="edit-buttons">
               <button>
@@ -72,6 +70,7 @@ export const Products = {
   data() {
     return {
       namePage: "Produtos",
+      search: null,
       typesSearch: "Pesquisar por nome",
       product: {
         name: null,
@@ -93,8 +92,26 @@ export const Products = {
   methods: {
     async getAllProducts() {
       const { data } = await axios.get("/products")
-      console.log(data)
       this.products = data
+    },
+    async searchLike(){
+      if(this.search != "") {
+        if(this.typesSearch === "Pesquisar por nome") {
+          const { data } = await axios.get(`/products/name/${this.search}`)
+          console.log(data)
+          this.products = data
+        } else if(this.typesSearch === "Pesquisar por data") {
+          const { data } = await axios.get(`/products/data/${this.search}`)
+          console.log(data)
+          this.products = data
+        } else if(this.typesSearch === "Pesquisar por preço") {
+          const { data } = await axios.get(`/products/price/${this.search}`)
+          console.log(data)
+          this.products = data
+        }
+      } else {
+        this.getAllProducts()
+      }
     },
     currency(number, lang = "pt-br", currencyAcronyms = "BRL") {
       const n = Number(number)

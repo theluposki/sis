@@ -13,6 +13,11 @@ route.get("/", async (req, res) => {
   res.status(200).json(result);
 });
 
+route.get("/count", async (req, res) => {
+  const result = await products.count();
+  res.status(200).json(result);
+});
+
 route.get("/name/:name", async (req, res) => {
   const result = await products.readAllByName(req.params.name);
   res.status(200).json(result);

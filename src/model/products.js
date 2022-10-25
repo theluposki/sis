@@ -70,6 +70,16 @@ export const products = {
       return "Erro na busca"
     }
   },
+  async count() {
+    try {
+      return openDb().then((db) => {
+        return db.get("SELECT COUNT(*) FROM products;")
+                  .then(data => data["COUNT(*)"]);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
   async readAllByName(name) {
     try {
       return openDb().then((db) => {

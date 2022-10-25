@@ -95,6 +95,8 @@ ON w.id = p.weight_id
 WHERE p.name LIKE 'Ar%'; 
 
 
+SELECT COUNT(*) FROM products;
+
 
 CREATE TABLE IF NOT EXISTS inventory (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

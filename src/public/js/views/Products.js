@@ -4,9 +4,6 @@ export const Products = {
   `
   <div class="products">
     <dialog id="modalAddProd">
-      <button class="btn-close" @click="CloseNewProd()">
-        <i class="ai-cross"></i>
-      </button>
 
       <div class="content">
         <h2>Adicionar Produto</h2>
@@ -59,7 +56,11 @@ export const Products = {
           Registrar
         </button>
         
-      </div>
+        </div>
+
+        <button class="btn-close" @click="CloseNewProd()">
+          <i class="ai-cross"></i>
+        </button>
     </dialog>
 
 
@@ -105,7 +106,7 @@ export const Products = {
             <th>Categoria</th>
             <th>Marca</th>
             <th>Unidade</th>
-            <th>Data de Criação</th>
+            <th>Criado em</th>
             <th></th>
           </tr>
         </thead>

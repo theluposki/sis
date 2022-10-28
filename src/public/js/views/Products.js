@@ -52,7 +52,7 @@ export const Products = {
           </select>
         </label>
 
-        <button @click="registerProduct()" class="btn-fuller end-form">
+        <button @click.prevent="registerProduct()" class="btn-fuller end-form">
           Registrar
         </button>
         
@@ -63,6 +63,66 @@ export const Products = {
         </button>
     </dialog>
 
+
+    <dialog id="modalEditProd">
+
+    <div class="content">
+      <h2>Editar Produto</h2>
+      
+      <label for="name">
+        <span>Nome</span>
+        <input v-model="product.name" id="name" type="text" placeholder="Nome"/>
+      </label>
+
+      <label for="desc">
+        <span>Descreva esse produto</span>
+        <input v-model="product.desc" id="desc" type="text" placeholder="Descrição"/>
+      </label>
+
+      <label for="purchasePrice">
+      <span>Preço de compra</span>
+        <input v-model="product.purchasePrice" id="purchasePrice" type="text" placeholder="Preço de compra"/>
+      </label>
+
+      <label for="price">
+        <span>Preço de venda</span>
+        <input v-model="product.price" id="price" type="text" placeholder="Preço"/>
+      </label>
+
+      <label for="category">
+        <span>Selecione a categoria</span>
+        <select id="category" v-model="product.categoryId">
+          <option value="0" disabled>Selecione a Categoria</option>
+          <option v-for="item in categories" :value="item.id" :key="item.id">{{ item.category }}</option>
+        </select>
+      </label>
+
+      <label for="brand">
+        <span>Selecione a marca</span>
+        <select id="brand" v-model="product.brandId">
+          <option value="0" disabled>Selecione a Marca</option>
+          <option v-for="item in brands" :value="item.id" :key="item.id">{{ item.brand }}</option>
+        </select>
+      </label>
+
+      <label for="weightId">
+        <span>Selecione a unidade</span>
+        <select id="category" v-model="product.weightId">
+          <option value="0" disabled>Selecione a Unidade</option>
+          <option v-for="item in weights" :value="item.id" :key="item.id">{{ item.Weight }}</option>
+        </select>
+      </label>
+
+      <button @click.prevent="updateProduct()" class="btn-fuller end-form">
+        Atualizar
+      </button>
+      
+      </div>
+
+      <button class="btn-close" @click="CloseEditProd()">
+        <i class="ai-cross"></i>
+      </button>
+  </dialog>
 
     <div class="prod_headers">
       <div class="p_h-info">
@@ -123,7 +183,7 @@ export const Products = {
             <td>{{prod.Weight}}</td>
             <td>{{dateFormat(prod.create_at)}}</td>
             <td class="edit-buttons">
-              <button>
+              <button @click="ShowEditProd(prod.id)">
                 <i class="ai-edit"></i>
               </button>
             </td>
@@ -139,6 +199,7 @@ export const Products = {
       namePage: "Produtos",
       count: 0,
       search: null,
+      currentId: null,
       typesSearch: "Pesquisar por nome",
       product: {
         name: null,
@@ -178,6 +239,23 @@ export const Products = {
 
       console.log(res)
     },
+    async updateProduct(){
+      if(this.currentId === null) {
+        return alert("Id não encontrado.")
+      } 
+      const res = await axios.put(`/products/${this.currentId}`, {
+        name: this.product.name,
+        desc: this.product.desc,
+        purchasePrice: this.product.purchasePrice,
+        price: this.product.price,
+        categoryId: this.product.categoryId,
+        brandId: this.product.brandId,
+        weightId: this.product.weightId
+      })
+
+      this.currentId = null
+      console.log(res)
+    },
     async getCategories(){
       const { data } = await axios.get("/category")
       this.categories = data
@@ -207,8 +285,34 @@ export const Products = {
 
       console.log("Show add")
     },
+    async ShowEditProd(id){
+      const modal = document.getElementById("modalEditProd")
+
+      modal.showModal()
+
+      console.log("Show edit")
+
+      this.currentId = id
+
+
+      const { data } = await axios.get(`/products/${id}`)
+
+      this.product.name = data.name
+      this.product.desc = data.desc
+      this.product.purchasePrice = data.purchase_price
+      this.product.price = data.price
+      this.product.categoryId = data.category_id
+      this.product.brandId = data.brand_id
+      this.product.weightId = data.weight_id
+
+      console.log(data)
+    },
     CloseNewProd() {
       const modal = document.getElementById("modalAddProd")
+      modal.close()
+    },
+    CloseEditProd() {
+      const modal = document.getElementById("modalEditProd")
       modal.close()
     },
     async searchLike(){

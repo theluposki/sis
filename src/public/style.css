@@ -412,6 +412,11 @@ dialog > .content > label > span {
   padding: 10px;
 }
 
+.edit-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .edit-buttons button {
   background-color: transparent;
   width: 100%;

@@ -186,6 +186,10 @@ export const Products = {
               <button @click="ShowEditProd(prod.id)">
                 <i class="ai-edit"></i>
               </button>
+
+              <button @click="deleteProd(prod.id)">
+                <i class="ai-trash-can"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -219,11 +223,7 @@ export const Products = {
   mounted() {
     this.$store.commit("setTitlePage", this.namePage)
 
-    this.getAllProducts()
-    this.getCount()
-    this.getCategories()
-    this.getBrands()
-    this.getWeights()
+    this.updateView()
   },
   methods: {
     async registerProduct(){
@@ -255,6 +255,19 @@ export const Products = {
 
       this.currentId = null
       console.log(res)
+    },
+    updateView() {
+      this.getAllProducts()
+      this.getCount()
+      this.getCategories()
+      this.getBrands()
+      this.getWeights()
+    },
+    async deleteProd(id) {
+        confirm(`tem certeza que quer excluir o produdo de id ${id}`)
+        await axios.delete(`/products/${id}`)
+
+        this.updateView()
     },
     async getCategories(){
       const { data } = await axios.get("/category")

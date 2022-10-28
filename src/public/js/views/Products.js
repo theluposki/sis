@@ -1,7 +1,6 @@
 export const Products = {
   name: "Produtos",
-  template: 
-  `
+  template: `
   <div class="products">
     <dialog id="modalAddProd">
 
@@ -212,144 +211,150 @@ export const Products = {
         price: null,
         categoryId: 0,
         brandId: 0,
-        weightId: 0
+        weightId: 0,
       },
       products: [],
       categories: [],
       brands: [],
-      weights: []
-    }
+      weights: [],
+    };
   },
   mounted() {
-    this.$store.commit("setTitlePage", this.namePage)
+    this.$store.commit("setTitlePage", this.namePage);
 
-    this.updateView()
+    this.updateView();
   },
   methods: {
-    async registerProduct(){
-      const res = await axios.post("/products", {
+    async registerProduct() {
+      await axios.post("/products", {
         name: this.product.name,
         desc: this.product.desc,
         purchasePrice: this.product.purchasePrice,
         price: this.product.price,
         categoryId: this.product.categoryId,
         brandId: this.product.brandId,
-        weightId: this.product.weightId
-      })
+        weightId: this.product.weightId,
+      });
 
-      console.log(res)
+      this.updateView();
     },
-    async updateProduct(){
-      if(this.currentId === null) {
-        return alert("Id não encontrado.")
-      } 
-      const res = await axios.put(`/products/${this.currentId}`, {
+    async updateProduct() {
+      if (this.currentId === null) {
+        return alert("Id não encontrado.");
+      }
+      await axios.put(`/products/${this.currentId}`, {
         name: this.product.name,
         desc: this.product.desc,
         purchasePrice: this.product.purchasePrice,
         price: this.product.price,
         categoryId: this.product.categoryId,
         brandId: this.product.brandId,
-        weightId: this.product.weightId
-      })
+        weightId: this.product.weightId,
+      });
 
-      this.currentId = null
-      console.log(res)
+      this.currentId = null;
+      this.updateView();
     },
     updateView() {
-      this.getAllProducts()
-      this.getCount()
-      this.getCategories()
-      this.getBrands()
-      this.getWeights()
+      this.getAllProducts();
+      this.getCount();
+      this.getCategories();
+      this.getBrands();
+      this.getWeights();
     },
     async deleteProd(id) {
-        confirm(`tem certeza que quer excluir o produdo de id ${id}`)
-        await axios.delete(`/products/${id}`)
+      if (confirm(`tem certeza que quer excluir o produdo de id ${id}`)) {
+        await axios.delete(`/products/${id}`);
+        this.updateView();
+        alert("Deletado com sucesso!!");
+      }
+    },
+    async getCategories() {
+      const { data } = await axios.get("/category");
+      this.categories = data;
+    },
+    async getBrands() {
+      const { data } = await axios.get("/brand");
+      this.brands = data;
+    },
+    async getWeights() {
+      const { data } = await axios.get("/weight");
 
-        this.updateView()
+      this.weights = data;
     },
-    async getCategories(){
-      const { data } = await axios.get("/category")
-      this.categories = data
-    },
-    async getBrands(){
-      const { data } = await axios.get("/brand")
-      this.brands = data
-      console.log(data)
-    },
-    async getWeights(){
-      const { data } = await axios.get("/weight")
-      console.log(data)
-      this.weights = data
-    },
-    async getCount(){
-      const { data } = await axios.get("/products/count")
-      this.count = data
+    async getCount() {
+      const { data } = await axios.get("/products/count");
+      this.count = data;
     },
     async getAllProducts() {
-      const { data } = await axios.get("/products")
-      this.products = data
+      const { data } = await axios.get("/products");
+      this.products = data;
     },
     ShowNewProd() {
-      const modal = document.getElementById("modalAddProd")
+      const modal = document.getElementById("modalAddProd");
 
-      modal.showModal()
-
-      console.log("Show add")
+      modal.showModal();
     },
-    async ShowEditProd(id){
-      const modal = document.getElementById("modalEditProd")
+    async ShowEditProd(id) {
+      const modal = document.getElementById("modalEditProd");
 
-      modal.showModal()
+      modal.showModal();
 
-      console.log("Show edit")
+      this.currentId = id;
 
-      this.currentId = id
+      const { data } = await axios.get(`/products/${id}`);
 
-
-      const { data } = await axios.get(`/products/${id}`)
-
-      this.product.name = data.name
-      this.product.desc = data.desc
-      this.product.purchasePrice = data.purchase_price
-      this.product.price = data.price
-      this.product.categoryId = data.category_id
-      this.product.brandId = data.brand_id
-      this.product.weightId = data.weight_id
-
-      console.log(data)
+      this.product.name = data.name;
+      this.product.desc = data.desc;
+      this.product.purchasePrice = data.purchase_price;
+      this.product.price = data.price;
+      this.product.categoryId = data.category_id;
+      this.product.brandId = data.brand_id;
+      this.product.weightId = data.weight_id;
     },
     CloseNewProd() {
-      const modal = document.getElementById("modalAddProd")
-      modal.close()
+      const modal = document.getElementById("modalAddProd");
+      modal.close();
     },
     CloseEditProd() {
-      const modal = document.getElementById("modalEditProd")
-      modal.close()
+      const modal = document.getElementById("modalEditProd");
+      modal.close();
     },
-    async searchLike(){
-      if(this.search != "") {
-        if(this.typesSearch === "Pesquisar por nome") {
-          const { data } = await axios.get(`/products/name/${this.search}`)
-          this.products = data
-        } else if(this.typesSearch === "Pesquisar por data") {
-          const { data } = await axios.get(`/products/data/${this.search}`)
-          this.products = data
-        } else if(this.typesSearch === "Pesquisar por preço") {
-          const { data } = await axios.get(`/products/price/${this.search}`)
-          this.products = data
+    async searchLike() {
+      if (this.search != "") {
+        if (this.typesSearch === "Pesquisar por nome") {
+          const { data } = await axios.get(`/products/name/${this.search}`);
+          this.products = data;
+        } else if (this.typesSearch === "Pesquisar por data") {
+          const { data } = await axios.get(`/products/data/${this.search}`);
+          this.products = data;
+        } else if (this.typesSearch === "Pesquisar por preço") {
+          const { data } = await axios.get(`/products/price/${this.search}`);
+          this.products = data;
         }
       } else {
-        this.getAllProducts()
+        this.getAllProducts();
       }
     },
     currency(number, lang = "pt-br", currencyAcronyms = "BRL") {
-      const n = Number(number)
-      return new Intl.NumberFormat(lang, { style: 'currency', currency: currencyAcronyms }).format(n)
+      const n = Number(number);
+      return new Intl.NumberFormat(lang, {
+        style: "currency",
+        currency: currencyAcronyms,
+      }).format(n);
     },
-    dateFormat(date, options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) {
-      return new Intl.DateTimeFormat(options.lang, options).format(new Date(date))
-    }
-  }
-}
+    dateFormat(
+      date,
+      options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    ) {
+      return new Intl.DateTimeFormat(options.lang, options).format(
+        new Date(date)
+      );
+    },
+  },
+};

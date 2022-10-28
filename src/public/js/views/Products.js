@@ -237,6 +237,7 @@ export const Products = {
       });
 
       this.updateView();
+      this.CloseNewProd()
     },
     async updateProduct() {
       if (this.currentId === null) {
@@ -254,6 +255,7 @@ export const Products = {
 
       this.currentId = null;
       this.updateView();
+      this.CloseEditProd()
     },
     updateView() {
       this.getAllProducts();

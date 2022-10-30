@@ -67,7 +67,7 @@ VALUES
 
 SELECT * FROM products;
 
-SELECT p.id, p.name, p.desc, p.purchase_price, p.price, c.category, b.brand, w.Weight, p.create_at
+SELECT p.id, p.name, p.desc, p.purchase_price, p.price, (p.price - p.purchase_price) AS profit, c.category, b.brand, w.Weight, p.create_at
 FROM products AS p
 
 INNER JOIN category AS c
@@ -81,7 +81,7 @@ ON w.id = p.weight_id;
 
 
 
-SELECT p.id, p.name, p.desc, p.purchase_price, p.price, c.category, b.brand, w.Weight, p.create_at
+SELECT p.id, p.name, p.desc, p.purchase_price, p.price, (p.price - p.purchase_price) AS profit, c.category, b.brand, w.Weight, p.create_at
 FROM products AS p
 
 INNER JOIN category AS c

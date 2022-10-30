@@ -88,13 +88,13 @@ select {
 }
 
 .btn-fuller:hover {
-  transition: all ease-in-out .4s;
+  transition: all ease-in-out 0.4s;
   cursor: pointer;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .btn-fuller:active {
-  transition: all ease-in-out .1s;
+  transition: all ease-in-out 0.1s;
   background-color: var(--silver);
 }
 
@@ -361,6 +361,7 @@ dialog > .content > label > span {
   color: var(--white);
   border-radius: 50%;
   font-size: 16px;
+  margin: 0 6px;
 }
 
 .btns-info > button:hover {

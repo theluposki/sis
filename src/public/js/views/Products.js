@@ -123,10 +123,85 @@ export const Products = {
       </button>
   </dialog>
 
+
+  <dialog id="modalAddCategory">
+
+    <div class="content">
+      <h2>Nova Categoria</h2>
+      
+      <label for="category">
+        <span>Categoria</span>
+          <input v-model="category" id="category" type="text" placeholder="Categoria"/>
+        </label>
+
+        <button @click.prevent="registerCategory()" class="btn-fuller end-form">
+          registrar
+        </button>
+        
+    </div>
+
+      <button class="btn-close" @click="CloseNewCategory()">
+        <i class="ai-cross"></i>
+      </button>
+  </dialog>
+
+
+  <dialog id="modalAddBrand">
+
+    <div class="content">
+      <h2>Nova Marca</h2>
+      
+      <label for="brand">
+        <span>Marca</span>
+          <input v-model="brand" id="brand" type="text" placeholder="Marca"/>
+        </label>
+
+        <button @click.prevent="registerBrand()" class="btn-fuller end-form">
+          registrar
+        </button>
+        
+    </div>
+
+      <button class="btn-close" @click="CloseNewBrand()">
+        <i class="ai-cross"></i>
+      </button>
+  </dialog>
+
+
+  <dialog id="modalAddWeight">
+
+  <div class="content">
+    <h2>Nova Unidade</h2>
+    
+    <label for="weight">
+      <span>Unidade</span>
+        <input v-model="weight" id="weight" type="text" placeholder="Unidade"/>
+      </label>
+
+      <button @click.prevent="registerWeight()" class="btn-fuller end-form">
+        registrar
+      </button>
+      
+  </div>
+
+    <button class="btn-close" @click="CloseNewWeight()">
+      <i class="ai-cross"></i>
+    </button>
+</dialog>
+
     <div class="prod_headers">
       <div class="p_h-info">
         <h3>Total de Produtos: {{ count }}</h3>
         <div class="btns-info">
+          <button @click="ShowNewWeight()">
+            <i class="ai-shipping-box-v1"></i>
+          </button>
+          <button @click="ShowNewBrand()">
+            <i class="ai-leaf"></i>
+          </button>
+          <button @click="ShowNewCategory()">
+            <i class="ai-flag"></i>
+          </button>
           <button @click="ShowNewProd()">
             <i class="ai-plus"></i>
           </button>
@@ -162,6 +237,7 @@ export const Products = {
             <th>Descrição</th>
             <th>Preço de compra</th>
             <th>Preço</th>
+            <th>Lucro</th>
             <th>Categoria</th>
             <th>Marca</th>
             <th>Unidade</th>
@@ -177,6 +253,7 @@ export const Products = {
             <td>{{prod.desc}}</td>
             <td>{{currency(prod.purchase_price)}}</td>
             <td>{{currency(prod.price)}}</td>
+            <td>{{currency(prod.profit)}}</td>
             <td>{{prod.category}}</td>
             <td>{{prod.brand}}</td>
             <td>{{prod.Weight}}</td>
@@ -204,6 +281,9 @@ export const Products = {
       search: null,
       currentId: null,
       typesSearch: "Pesquisar por nome",
+      category: null,
+      brand: null,
+      weight: null,
       product: {
         name: null,
         desc: null,
@@ -225,6 +305,30 @@ export const Products = {
     this.updateView();
   },
   methods: {
+    async registerCategory() {
+      await axios.post("/category", {
+        category: this.category,
+      });
+
+      this.updateView();
+      this.CloseNewCategory();
+    },
+    async registerBrand() {
+      await axios.post("/brand", {
+        brand: this.brand,
+      });
+
+      this.updateView();
+      this.CloseNewCategory();
+    },
+    async registerWeight() {
+      await axios.post("/weight", {
+        weight: this.weight,
+      });
+
+      this.updateView();
+      this.CloseNewCategory();
+    },
     async registerProduct() {
       await axios.post("/products", {
         name: this.product.name,
@@ -237,7 +341,7 @@ export const Products = {
       });
 
       this.updateView();
-      this.CloseNewProd()
+      this.CloseNewProd();
     },
     async updateProduct() {
       if (this.currentId === null) {
@@ -255,7 +359,7 @@ export const Products = {
 
       this.currentId = null;
       this.updateView();
-      this.CloseEditProd()
+      this.CloseEditProd();
     },
     updateView() {
       this.getAllProducts();
@@ -297,6 +401,22 @@ export const Products = {
 
       modal.showModal();
     },
+    ShowNewCategory() {
+      const modal = document.getElementById("modalAddCategory");
+
+      modal.showModal();
+    },
+    ShowNewBrand() {
+      const modal = document.getElementById("modalAddBrand");
+
+      modal.showModal();
+    },
+
+    ShowNewWeight() {
+      const modal = document.getElementById("modalAddWeight");
+
+      modal.showModal();
+    },
     async ShowEditProd(id) {
       const modal = document.getElementById("modalEditProd");
 
@@ -320,6 +440,18 @@ export const Products = {
     },
     CloseEditProd() {
       const modal = document.getElementById("modalEditProd");
+      modal.close();
+    },
+    CloseNewCategory() {
+      const modal = document.getElementById("modalAddCategory");
+      modal.close();
+    },
+    CloseNewBrand() {
+      const modal = document.getElementById("modalAddBrand");
+      modal.close();
+    },
+    CloseNewWeight() {
+      const modal = document.getElementById("modalAddWeight");
       modal.close();
     },
     async searchLike() {

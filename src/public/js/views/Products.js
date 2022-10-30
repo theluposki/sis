@@ -135,7 +135,7 @@ export const Products = {
         </label>
 
         <button @click.prevent="registerCategory()" class="btn-fuller end-form">
-          registrar
+          Registar
         </button>
         
     </div>
@@ -157,7 +157,7 @@ export const Products = {
         </label>
 
         <button @click.prevent="registerBrand()" class="btn-fuller end-form">
-          registrar
+          Registar
         </button>
         
     </div>
@@ -179,7 +179,7 @@ export const Products = {
       </label>
 
       <button @click.prevent="registerWeight()" class="btn-fuller end-form">
-        registrar
+        Registar
       </button>
       
   </div>

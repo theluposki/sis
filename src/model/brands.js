@@ -13,6 +13,17 @@ export const brands = {
     });
   },
 
+  async count() {
+    try {
+      return openDb().then((db) => {
+        return db.get("SELECT COUNT(*) FROM brand;")
+                  .then(data => data["COUNT(*)"]);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
   insert(brand) {
     try {
       openDb().then((db) => {
@@ -23,6 +34,19 @@ export const brands = {
       return "Erro ao registrar."
     }
   },
+
+  async readAllByBrand(brand) {
+    try {
+      return openDb().then((db) => {
+        return db.all(`
+            SELECT * FROM brand AS b WHERE b.brand LIKE ?;
+        `,[brand+"%"]).then(data => data);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
   async readAll() {
     try {
       return openDb().then((db) => {

@@ -10,6 +10,16 @@ route.post("/", async (req, res) => {
     res.status(200).json(result)
 })
 
+route.get("/count", async (req, res) => {
+  const result = await weights.count();
+  res.status(200).json(result);
+});
+
+route.get("/weight/:weight", async (req, res) => {
+  const result = await weights.readAllByBrand(req.params.weight)
+  res.status(200).json(result)
+})
+
 route.get("/", async (req, res) => {
   const result = await weights.readAll()
   res.status(200).json(result)

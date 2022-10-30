@@ -13,6 +13,17 @@ export const categories = {
     });
   },
 
+  async count() {
+    try {
+      return openDb().then((db) => {
+        return db.get("SELECT COUNT(*) FROM category;")
+                  .then(data => data["COUNT(*)"]);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
   insert(category) {
     try {
       openDb().then((db) => {
@@ -27,6 +38,17 @@ export const categories = {
     try {
       return openDb().then((db) => {
         return db.all("SELECT * FROM category;").then(data => data);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+  async readAllByCategory(category) {
+    try {
+      return openDb().then((db) => {
+        return db.all(`
+            SELECT * FROM category AS c WHERE c.category LIKE ?;
+        `,[category+"%"]).then(data => data);
       });
     } catch {
       return "Erro na busca"

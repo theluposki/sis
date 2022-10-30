@@ -449,6 +449,21 @@ dialog > .content > label > span {
 *
 */
 
+.cat_headers {
+  position: fixed;
+  background-color: var(--white);
+  padding: 5px;
+
+  width: 100%;
+  height: 100px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 3px 0 var(--dark);
+}
+
 @media screen and (min-width: 1200px) {
   .content-table {
     width: 100%;

@@ -15,6 +15,16 @@ route.get("/", async (req, res) => {
   res.status(200).json(result)
 })
 
+route.get("/count", async (req, res) => {
+  const result = await categories.count();
+  res.status(200).json(result);
+});
+
+route.get("/cat/:category", async (req, res) => {
+  const result = await categories.readAllByCategory(req.params.category)
+  res.status(200).json(result)
+})
+
 route.get("/:id", async (req, res) => {
   const result = await categories.readOneByID(req.params.id)
   res.status(200).json(result)

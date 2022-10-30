@@ -13,6 +13,17 @@ export const weights = {
     });
   },
 
+  async count() {
+    try {
+      return openDb().then((db) => {
+        return db.get("SELECT COUNT(*) FROM weight;")
+                  .then(data => data["COUNT(*)"]);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
   insert(weight) {
     try {
       openDb().then((db) => {
@@ -23,6 +34,19 @@ export const weights = {
       return "Erro ao registrar."
     }
   },
+
+  async readAllByBrand(weight) {
+    try {
+      return openDb().then((db) => {
+        return db.all(`
+            SELECT * FROM weight AS w WHERE w.Weight LIKE ?;
+        `,[weight+"%"]).then(data => data);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+  
   async readAll() {
     try {
       return openDb().then((db) => {

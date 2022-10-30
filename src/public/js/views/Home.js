@@ -21,6 +21,21 @@ export const Home = {
       <i class="ai-grid"></i>
     </router-link>
 
+    <router-link to="/categories" tabindex="4" class="c__box">
+      <h4>Categorias</h4>
+      <i class="ai-flag"></i>
+    </router-link>
+
+
+    <router-link to="/brands" tabindex="5" class="c__box">
+      <h4>Marcas</h4>
+      <i class="ai-leaf"></i>
+    </router-link>
+
+    <router-link to="/weights" tabindex="6" class="c__box">
+      <h4>Unidades</h4>
+      <i class="ai-shipping-box-v1"></i>
+    </router-link>
     </div>
   </div>
   `,

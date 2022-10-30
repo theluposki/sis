@@ -10,6 +10,16 @@ route.post("/", async (req, res) => {
     res.status(200).json(result)
 })
 
+route.get("/count", async (req, res) => {
+  const result = await brands.count();
+  res.status(200).json(result);
+});
+
+route.get("/brand/:brand", async (req, res) => {
+  const result = await brands.readAllByBrand(req.params.brand)
+  res.status(200).json(result)
+})
+
 route.get("/", async (req, res) => {
   const result = await brands.readAll()
   res.status(200).json(result)

@@ -14,6 +14,17 @@ export const clients = {
     });
   },
 
+  async count() {
+    try {
+      return openDb().then((db) => {
+        return db.get("SELECT COUNT(*) FROM client;")
+                  .then(data => data["COUNT(*)"]);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
   insert(body) {
     const { name, situation } = body
     try {
@@ -31,6 +42,20 @@ export const clients = {
       return "Erro ao registrar."
     }
   },
+
+  async readAllByName(name) {
+    try {
+      return openDb().then((db) => {
+        return db.all(`
+            SELECT * FROM client AS c WHERE c.name LIKE ?;
+        `,[name+"%"]).then(data => data);
+      });
+    } catch {
+      return "Erro na busca"
+    }
+  },
+
+
   async readAll() {
     try {
       return openDb().then((db) => {

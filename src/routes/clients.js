@@ -8,6 +8,17 @@ route.post("/", (req, res) => {
   res.status(200).json(result);
 });
 
+
+route.get("/count", async (req, res) => {
+  const result = await clients.count();
+  res.status(200).json(result);
+});
+
+route.get("/client/:name", async (req, res) => {
+  const result = await clients.readAllByName(req.params.name)
+  res.status(200).json(result)
+})
+
 route.get("/", async (req, res) => {
   const result = await clients.readAll();
   res.status(200).json(result);

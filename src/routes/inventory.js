@@ -8,13 +8,33 @@ route.post("/", (req, res) => {
   res.status(200).json(result);
 });
 
+route.get("/count", async (req, res) => {
+  const result = await inventory.count();
+  res.status(200).json(result);
+});
+
 route.get("/", async (req, res) => {
   const result = await inventory.readAll();
   res.status(200).json(result);
 });
 
+route.get("/name/:name", async (req, res) => {
+  const result = await inventory.readAllByNamesLike(req.params.name)
+  res.status(200).json(result)
+})
+
+route.get("/inv", async (req, res) => {
+  const result = await inventory.readAllByNames();
+  res.status(200).json(result);
+});
+
 route.get("/:id", async (req, res) => {
   const result = await inventory.readOneByID(req.params.id);
+  res.status(200).json(result);
+});
+
+route.get("/name-id/:id", async (req, res) => {
+  const result = await inventory.readOneByIDNames(req.params.id);
   res.status(200).json(result);
 });
 

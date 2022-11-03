@@ -16,6 +16,10 @@
   --silver: #777777;
 
   --green: #22fec8;
+
+  --bg-green: #1cff76;
+  --bg-yellow: #ffce5a;
+  --bg-red: #ff3941;
 }
 
 html,
@@ -43,6 +47,51 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.positive {
+  background-color: var(--bg-green);
+}
+
+.partial {
+  background-color: var(--bg-yellow);
+}
+
+.negative {
+  background-color: var(--bg-red);
+}
+
+.IncDec {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.IncDec span {
+  margin: 0 16px;
+  font-weight: 900;
+}
+
+.IncDec button {
+  font-size: 33px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.IncDec button:hover {
+  transition: all ease 0.4s;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.IncDec button:active {
+  transition: all ease-in-out 0.1s;
+  background-color: var(--dark);
+  color: var(--white);
+  box-shadow: 0 0 2px 0 var(--dark);
 }
 
 input[type="search"],
@@ -553,8 +602,6 @@ dialog > .content > label > span {
   }
   .table-prod tbody tr td:nth-child(5) {
     /* preço */
-    background-color: #d6f6dc;
-    color: #156323;
     min-width: 100px;
   }
   .table-prod tbody tr td:nth-child(6) {

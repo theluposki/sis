@@ -36,6 +36,17 @@ export const Home = {
       <h4>Unidades</h4>
       <i class="ai-shipping-box-v1"></i>
     </router-link>
+
+    <router-link to="/client" tabindex="7" class="c__box">
+      <h4>Clientes</h4>
+      <i class="ai-people-group"></i>
+    </router-link>
+
+    <router-link to="/inventory" tabindex="8" class="c__box">
+      <h4>Estoque</h4>
+      <i class="ai-book-open"></i>
+    </router-link>
+
     </div>
   </div>
   `,
